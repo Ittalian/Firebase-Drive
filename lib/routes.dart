@@ -1,0 +1,26 @@
+import 'package:firebase_drive/views/firebase/firebase_page.dart';
+import 'package:firebase_drive/views/home/home.dart';
+import 'package:flutter/material.dart';
+
+class AppRoutes {
+  static const String home = '/';
+  static const String firebasePage = '/firebase';
+
+  static Route<dynamic> generateRoute(RouteSettings settings) {
+    switch (settings.name) {
+      case home:
+        return MaterialPageRoute(builder: (_) => const Home());
+      case firebasePage:
+        final args = settings.arguments as bool;
+        return MaterialPageRoute(builder: (_) => FirebasePage(isFromDrive: args));
+      default:
+        return MaterialPageRoute(
+            builder: (_) => Scaffold(
+                    body: Center(
+                        child: Text(
+                  '${settings.name}は存在しません',
+                  style: const TextStyle(fontSize: 20),
+                ))));
+    }
+  }
+}
