@@ -28,7 +28,7 @@ class FirebasePage extends StatelessWidget {
             const Padding(padding: EdgeInsets.only(top: 150)),
             Container(
                 padding: const EdgeInsets.only(left: 10),
-                margin: const EdgeInsets.fromLTRB(50, 0, 50, 0),
+                margin: const EdgeInsets.fromLTRB(35, 0, 35, 0),
                 color: Colors.white,
                 alignment: Alignment.center,
                 child: Row(children: [
@@ -36,13 +36,13 @@ class FirebasePage extends StatelessWidget {
                     usedAppText,
                     style: const TextStyle(fontSize: 20),
                   ),
-                  const Padding(padding: EdgeInsets.only(left: 30)),
+                  const Padding(padding: EdgeInsets.only(left: 10)),
                   UsedAppDropDownList(menuList: usedAppViewModel.usedApps)
                 ])),
             const Padding(padding: EdgeInsets.only(top: 20)),
             Container(
                 padding: const EdgeInsets.only(left: 10),
-                margin: const EdgeInsets.fromLTRB(50, 0, 50, 0),
+                margin: const EdgeInsets.fromLTRB(35, 0, 35, 0),
                 color: Colors.white,
                 alignment: Alignment.center,
                 child: Row(children: [
@@ -50,7 +50,7 @@ class FirebasePage extends StatelessWidget {
                     categoryText,
                     style: const TextStyle(fontSize: 20),
                   ),
-                  const Padding(padding: EdgeInsets.only(left: 30)),
+                  const Padding(padding: EdgeInsets.only(left: 10)),
                   CategoryDropDownList(menuList: categoryViewModel.categories)
                 ]))
           ])),
