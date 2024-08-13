@@ -1,3 +1,5 @@
+import 'package:firebase_drive/utils/constants/categpry_titles.dart';
+
 class PictureCategory {
   final String categoryId;
   final String name;
@@ -8,13 +10,13 @@ class PictureCategory {
   });
 
   factory PictureCategory.fromMap(Map<String, dynamic> map, String categoryId) {
-    return PictureCategory(categoryId: categoryId, name: map['name'] ?? '');
+    return PictureCategory(categoryId: categoryId, name: categoryTitles[map['name']] ?? '');
   }
 
   Map<String, dynamic> toMap() {
     return {
       'category_id': categoryId,
-      'name': name,
+      'name': categoryTitles[name],
     };
   }
 }
