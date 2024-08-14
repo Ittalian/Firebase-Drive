@@ -4,7 +4,9 @@ import 'drop_down_item.dart';
 
 class UsedAppDropDownList extends StatefulWidget {
   final List<UsedApp> menuList;
-  const UsedAppDropDownList({super.key, required this.menuList});
+  final Function(String?) notifyParent;
+  const UsedAppDropDownList(
+      {super.key, required this.menuList, required this.notifyParent});
 
   @override
   State<UsedAppDropDownList> createState() => _UsedAppDropDownListState();
@@ -34,12 +36,15 @@ class _UsedAppDropDownListState extends State<UsedAppDropDownList> {
       items: [
         for (var menu in widget.menuList)
           DropdownMenuItem<String>(
-              value: menu.name, child: DropdownItem(name: menu.name))
+              value: menu.usedAppId,
+              child: DropdownItem(name: menu.name, fontSize: 20))
       ],
       onChanged: (String? value) {
+        print(value);
         setState(() {
           setName(value);
         });
+        widget.notifyParent(value);
       },
     );
   }

@@ -4,7 +4,8 @@ import 'drop_down_item.dart';
 
 class CategoryDropDownList extends StatefulWidget {
   final List<PictureCategory> menuList;
-  const CategoryDropDownList({super.key, required this.menuList});
+  final Function(String?) notifyParent;
+  const CategoryDropDownList({super.key, required this.menuList, required this.notifyParent});
 
   @override
   State<CategoryDropDownList> createState() => _CategoryDropDownListState();
@@ -34,12 +35,14 @@ class _CategoryDropDownListState extends State<CategoryDropDownList> {
       items: [
         for (var menu in widget.menuList)
           DropdownMenuItem<String>(
-              value: menu.name, child: DropdownItem(name: menu.name))
+              value: menu.categoryId,
+              child: DropdownItem(name: menu.name, fontSize: 14))
       ],
       onChanged: (String? value) {
         setState(() {
           setName(value);
         });
+        widget.notifyParent(value);
       },
     );
   }

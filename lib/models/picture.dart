@@ -1,12 +1,12 @@
 class Picture {
-  final String pictureId;
+  final String? pictureId;
   final String driveId;
   final String categoryId;
   final String usedAppId;
   final bool favorite;
 
   Picture({
-    required this.pictureId,
+    this.pictureId,
     required this.driveId,
     required this.categoryId,
     required this.usedAppId,
