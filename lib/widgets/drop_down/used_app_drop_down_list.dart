@@ -14,6 +14,7 @@ class UsedAppDropDownList extends StatefulWidget {
 
 class _UsedAppDropDownListState extends State<UsedAppDropDownList> {
   String? name;
+  String labelText = '使用アプリ';
 
   @override
   void initState() {
@@ -31,8 +32,10 @@ class _UsedAppDropDownListState extends State<UsedAppDropDownList> {
 
   @override
   Widget build(BuildContext context) {
-    return DropdownButton(
+    return DropdownButtonFormField(
       value: name,
+      decoration: InputDecoration(
+          labelText: labelText, labelStyle: const TextStyle(fontSize: 20)),
       items: [
         for (var menu in widget.menuList)
           DropdownMenuItem<String>(
@@ -40,7 +43,6 @@ class _UsedAppDropDownListState extends State<UsedAppDropDownList> {
               child: DropdownItem(name: menu.name, fontSize: 20))
       ],
       onChanged: (String? value) {
-        print(value);
         setState(() {
           setName(value);
         });

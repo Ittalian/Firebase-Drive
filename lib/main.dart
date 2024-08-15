@@ -6,6 +6,7 @@ import 'package:firebase_drive/services/firestore_service.dart';
 import 'package:firebase_drive/view_models/category_view_model.dart';
 import 'package:firebase_drive/view_models/picture_view_model.dart';
 import 'package:firebase_drive/view_models/used_app_view_model.dart';
+import 'package:firebase_drive/widgets/checkbox/custom_checkbox.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
@@ -36,7 +37,7 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(
               create: (_) =>
                   CategoryViewModel(CategoryRepository(FirestoreService()))),
-
+          ChangeNotifierProvider(create: (_) => CustomCheckbox()),
         ],
         child: const MaterialApp(
           debugShowCheckedModeBanner: false,

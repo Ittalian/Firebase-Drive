@@ -23,6 +23,7 @@ class CustomTextformfield extends StatelessWidget {
       ),
       validator: validator,
       onChanged: onChanged,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
     );
   }
 }

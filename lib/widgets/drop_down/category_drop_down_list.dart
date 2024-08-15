@@ -1,11 +1,13 @@
 import 'package:firebase_drive/models/picture_category.dart';
+import 'package:firebase_drive/utils/validator/firebase/category_validator.dart';
 import 'package:flutter/material.dart';
 import 'drop_down_item.dart';
 
 class CategoryDropDownList extends StatefulWidget {
   final List<PictureCategory> menuList;
   final Function(String?) notifyParent;
-  const CategoryDropDownList({super.key, required this.menuList, required this.notifyParent});
+  const CategoryDropDownList(
+      {super.key, required this.menuList, required this.notifyParent});
 
   @override
   State<CategoryDropDownList> createState() => _CategoryDropDownListState();
@@ -13,6 +15,7 @@ class CategoryDropDownList extends StatefulWidget {
 
 class _CategoryDropDownListState extends State<CategoryDropDownList> {
   String? name;
+  String labelText = 'カテゴリ';
 
   @override
   void initState() {
@@ -30,8 +33,10 @@ class _CategoryDropDownListState extends State<CategoryDropDownList> {
 
   @override
   Widget build(BuildContext context) {
-    return DropdownButton(
+    return DropdownButtonFormField<String>(
       value: name,
+      decoration: InputDecoration(
+          labelText: labelText, labelStyle: const TextStyle(fontSize: 20)),
       items: [
         for (var menu in widget.menuList)
           DropdownMenuItem<String>(
@@ -44,6 +49,8 @@ class _CategoryDropDownListState extends State<CategoryDropDownList> {
         });
         widget.notifyParent(value);
       },
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      validator: (value) => CategoryValidator(value: value).validate(),
     );
   }
 }
