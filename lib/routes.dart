@@ -1,3 +1,4 @@
+import 'package:firebase_drive/views/drive/drive_page.dart';
 import 'package:firebase_drive/views/firebase/firebase_page.dart';
 import 'package:firebase_drive/views/home/home.dart';
 import 'package:flutter/material.dart';
@@ -5,6 +6,7 @@ import 'package:flutter/material.dart';
 class AppRoutes {
   static const String home = '/';
   static const String firebasePage = '/firebase';
+  static const String drivePage = '/drive';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -12,7 +14,10 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => const Home());
       case firebasePage:
         final args = settings.arguments as bool;
-        return MaterialPageRoute(builder: (_) => FirebasePage(isFromDrive: args));
+        return MaterialPageRoute(
+            builder: (_) => FirebasePage(isFromDrive: args));
+      case drivePage:
+        return MaterialPageRoute(builder: (_) => const DrivePage());
       default:
         return MaterialPageRoute(
             builder: (_) => Scaffold(

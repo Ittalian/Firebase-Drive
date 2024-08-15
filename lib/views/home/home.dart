@@ -26,7 +26,12 @@ class _HomeState extends State<Home> {
               Container(
                   alignment: Alignment.center,
                   child: ElevatedButton.icon(
-                      onPressed: () {}, label: Text(driveButtonText))),
+                      onPressed: () {
+                        Navigator.pushNamed(
+                          context,
+                          AppRoutes.drivePage
+                        );
+                      }, label: Text(driveButtonText))),
               const Padding(padding: EdgeInsets.only(top: 10)),
               Container(
                   alignment: Alignment.center,
