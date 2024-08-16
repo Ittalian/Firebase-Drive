@@ -2,6 +2,7 @@ import 'package:firebase_drive/models/picture_category.dart';
 import 'package:firebase_drive/utils/validator/firebase/category_validator.dart';
 import 'package:flutter/material.dart';
 import 'drop_down_item.dart';
+import '../../utils/constants/widget/category_drop_down_list.dart' as category_drop_down_constants;
 
 class CategoryDropDownList extends StatefulWidget {
   final List<PictureCategory> menuList;
@@ -16,7 +17,6 @@ class CategoryDropDownList extends StatefulWidget {
 class _CategoryDropDownListState extends State<CategoryDropDownList> {
   String? name;
   String? value;
-  String labelText = 'カテゴリ';
 
   @override
   void initState() {
@@ -40,10 +40,10 @@ class _CategoryDropDownListState extends State<CategoryDropDownList> {
   Widget build(BuildContext context) {
     return DropdownButtonFormField<String>(
       value: value,
-      decoration: InputDecoration(
+      decoration: const InputDecoration(
           border: InputBorder.none,
-          labelText: labelText,
-          labelStyle: const TextStyle(fontSize: 20)),
+          labelText: category_drop_down_constants.labelText,
+          labelStyle: TextStyle(fontSize: 20)),
       items: [
         for (var menu in widget.menuList)
           DropdownMenuItem<String>(
