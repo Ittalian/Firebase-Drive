@@ -20,9 +20,7 @@ class _CategoryDropDownListState extends State<CategoryDropDownList> {
   @override
   void initState() {
     super.initState();
-    if (widget.menuList.isNotEmpty) {
-      name = widget.menuList.first.name;
-    }
+    if (widget.menuList.isNotEmpty) name;
   }
 
   void setName(String? value) {
@@ -36,7 +34,9 @@ class _CategoryDropDownListState extends State<CategoryDropDownList> {
     return DropdownButtonFormField<String>(
       value: name,
       decoration: InputDecoration(
-          labelText: labelText, labelStyle: const TextStyle(fontSize: 20)),
+          border: InputBorder.none,
+          labelText: labelText,
+          labelStyle: const TextStyle(fontSize: 20)),
       items: [
         for (var menu in widget.menuList)
           DropdownMenuItem<String>(

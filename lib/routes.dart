@@ -13,9 +13,9 @@ class AppRoutes {
       case home:
         return MaterialPageRoute(builder: (_) => const Home());
       case firebasePage:
-        final args = settings.arguments as bool;
+        final args = settings.arguments as String;
         return MaterialPageRoute(
-            builder: (_) => FirebasePage(isFromDrive: args));
+            builder: (_) => FirebasePage(driveId: args));
       case drivePage:
         return MaterialPageRoute(builder: (_) => const DrivePage());
       default:

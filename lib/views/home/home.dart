@@ -40,7 +40,7 @@ class _HomeState extends State<Home> {
                         Navigator.pushNamed(
                           context,
                           AppRoutes.firebasePage,
-                          arguments: false,
+                          arguments: '',
                         );
                       },
                       label: Text(firebaseButtonText))),

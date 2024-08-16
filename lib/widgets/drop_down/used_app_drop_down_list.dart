@@ -19,9 +19,7 @@ class _UsedAppDropDownListState extends State<UsedAppDropDownList> {
   @override
   void initState() {
     super.initState();
-    if (widget.menuList.isNotEmpty) {
-      name = widget.menuList.first.name;
-    }
+    if (widget.menuList.isNotEmpty) name;
   }
 
   void setName(String? value) {
@@ -35,12 +33,16 @@ class _UsedAppDropDownListState extends State<UsedAppDropDownList> {
     return DropdownButtonFormField(
       value: name,
       decoration: InputDecoration(
-          labelText: labelText, labelStyle: const TextStyle(fontSize: 20)),
+          border: InputBorder.none,
+          labelText: labelText,
+          labelStyle: const TextStyle(fontSize: 20)),
       items: [
+        const DropdownMenuItem<String>(
+            value: '', child: DropdownItem(name: '', fontSize: 14)),
         for (var menu in widget.menuList)
           DropdownMenuItem<String>(
               value: menu.usedAppId,
-              child: DropdownItem(name: menu.name, fontSize: 20))
+              child: DropdownItem(name: menu.name, fontSize: 14))
       ],
       onChanged: (String? value) {
         setState(() {

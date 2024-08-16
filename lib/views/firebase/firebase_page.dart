@@ -12,8 +12,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class FirebasePage extends StatelessWidget {
-  final bool isFromDrive;
-  FirebasePage({super.key, required this.isFromDrive});
+  final String driveId;
+  FirebasePage({super.key, required this.driveId});
 
   final TextEditingController driveIdController = TextEditingController();
   final TextEditingController usedAppIdController = TextEditingController();
@@ -30,40 +30,48 @@ class FirebasePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String saveText = '保存';
-    String saveMessage = '';
+    String saveMessage = '保存しました';
     String favoriteText = 'お気に入り';
     final pictureViewModel = context.watch<PictureViewModel>();
     final usedAppViewModel = context.watch<UsedAppViewModel>();
     final categoryViewModel = context.watch<CategoryViewModel>();
     final checkboxModel = context.watch<CustomCheckbox>();
+    bool isFromDrive = false;
+    if (driveId.isNotEmpty) {
+      isFromDrive = true;
+    }
     return Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
           image: DecorationImage(
-              image: AssetImage('images/firebase_background.jpg'),
+              image: driveId.isEmpty
+                  ? const AssetImage('images/firebase_background.jpg')
+                  : const AssetImage('images/firebase_background2.jpg'),
               fit: BoxFit.cover)),
       child: Scaffold(
           backgroundColor: Colors.white.withOpacity(0),
           body: Form(
               child:
                   Column(mainAxisAlignment: MainAxisAlignment.end, children: [
+            !isFromDrive
+                ? Flexible(
+                    child: Container(
+                        height: 70,
+                        padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
+                        margin: const EdgeInsets.fromLTRB(35, 0, 35, 0),
+                        alignment: Alignment.center,
+                        color: Colors.white,
+                        child: CustomTextformfield(
+                            controller: driveIdController,
+                            labelText: "Google Drive ID",
+                            onChanged: (value) {
+                              driveIdController.text = value;
+                            },
+                            validator: (value) =>
+                                DriveIdValidator(value: value).validate())))
+                : const SizedBox.shrink(),
             Flexible(
                 child: Container(
-                    height: 70,
-                    padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
-                    margin: const EdgeInsets.fromLTRB(35, 0, 35, 0),
-                    alignment: Alignment.center,
-                    color: Colors.white,
-                    child: CustomTextformfield(
-                        controller: driveIdController,
-                        labelText: "Google Drive ID",
-                        onChanged: (value) {
-                          driveIdController.text = value;
-                        },
-                        validator: (value) =>
-                            DriveIdValidator(value: value).validate()))),
-            Flexible(
-                child: Container(
-                    height: 50,
+                    height: 65,
                     padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                     margin: const EdgeInsets.fromLTRB(35, 20, 35, 0),
                     color: Colors.white,
@@ -73,7 +81,7 @@ class FirebasePage extends StatelessWidget {
                         notifyParent: setUsedApp))),
             Flexible(
                 child: Container(
-                    height: 50,
+                    height: 65,
                     padding: const EdgeInsets.only(left: 10),
                     margin: const EdgeInsets.fromLTRB(35, 20, 35, 20),
                     color: Colors.white,
@@ -92,12 +100,21 @@ class FirebasePage extends StatelessWidget {
               return ElevatedButton.icon(
                   onPressed: () {
                     if (Form.of(context).validate()) {
-                      Picture picture = Picture(
-                          driveId: driveIdController.text,
-                          categoryId: categoryIdController.text,
-                          usedAppId: usedAppIdController.text,
-                          favorite: checkboxModel.isChecked);
-                      pictureViewModel.addPicture(picture);
+                      if (isFromDrive) {
+                        Picture picture = Picture(
+                            driveId: driveId,
+                            categoryId: categoryIdController.text,
+                            usedAppId: usedAppIdController.text,
+                            favorite: checkboxModel.isChecked);
+                        pictureViewModel.addPicture(picture);
+                      } else {
+                        Picture picture = Picture(
+                            driveId: driveIdController.text,
+                            categoryId: categoryIdController.text,
+                            usedAppId: usedAppIdController.text,
+                            favorite: checkboxModel.isChecked);
+                        pictureViewModel.addPicture(picture);
+                      }
                       Savemessage(saveMessage).informAction(context);
                     }
                   },
