@@ -6,6 +6,7 @@ import 'package:flutter/widgets.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:googleapis/drive/v3.dart';
 import 'package:http/http.dart';
+import '../constants/drive/google_drive.dart' as google_drive;
 
 final googleSignIn = GoogleSignIn(scopes: [DriveApi.driveScope]);
 
@@ -16,10 +17,6 @@ class GoogleDrive {
   GoogleSignInAccount? account;
   Client? client;
   DriveApi? drive;
-  String createText = '新規ファイルをアップロードしました';
-  String updateText = 'ドライブのファイルを更新しました';
-  String getPathErrorText = 'パスの取得時にエラーが発生しました';
-  String accessRightErrorText = 'アクセス権を付与できませんでした';
 
   signIn() async {
     account = await googleSignIn.signIn();
@@ -39,19 +36,17 @@ class GoogleDrive {
 
       await drive?.permissions.create(permission, fileId);
     } catch (e) {
-      PermissionErrorMessage(accessRightErrorText).informAction(context);
+      const PermissionErrorMessage(google_drive.accessRightErrorText).informAction(context);
     }
   }
 
   Future<String> upload(String path, String fileName) async {
-    const folderName = "stable gallery";
-    const subFolderName = "images";
     var txtFile = io.File(path);
     var mimType = 'image/jpeg';
 
-    String? folderId = await getOrCreateFolderId(folderName);
+    String? folderId = await getOrCreateFolderId(google_drive.folderName);
     String? subFolderId =
-        await getOrCreateFolderId(subFolderName, parentFolderId: folderId);
+        await getOrCreateFolderId(google_drive.subFolderName, parentFolderId: folderId);
 
     var list = (await drive?.files.list())?.files;
     String id = "";
@@ -64,7 +59,7 @@ class GoogleDrive {
     if (fileName.endsWith('.jpg')) {
       mimType = 'image/png';
     }
-    
+
     var file = File(
         name: fileName,
         modifiedTime: DateTime.now().toUtc(),
@@ -72,19 +67,11 @@ class GoogleDrive {
         parents: [subFolderId!]);
     var media = Media(txtFile.openRead(), txtFile.lengthSync());
 
-    if (id == "") {
-      await drive?.files.create(file, uploadMedia: media).then((file) {
-        setFilePublic(file.id!);
-        id = file.id!;
-      });
-      Savemessage(createText).informAction(context);
-    } else {
-      await drive?.files.update(file, id, uploadMedia: media).then((file) {
-        setFilePublic(file.id!);
-        id = file.id!;
-      });
-      Savemessage(updateText).informAction(context);
-    }
+    await drive?.files.create(file, uploadMedia: media).then((file) {
+      setFilePublic(file.id!);
+      id = file.id!;
+    });
+    const Savemessage(google_drive.createText).informAction(context);
     return id;
   }
 
@@ -107,7 +94,7 @@ class GoogleDrive {
 
       return createdFolder?.id;
     } catch (e) {
-      PermissionErrorMessage(getPathErrorText);
+      const PermissionErrorMessage(google_drive.getPathErrorText);
       return null;
     }
   }

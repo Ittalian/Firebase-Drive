@@ -2,12 +2,14 @@ import 'dart:io';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:external_path/external_path.dart';
 import 'package:firebase_drive/routes.dart';
+import 'package:firebase_drive/utils/dialog/loading_dialog.dart';
 import 'package:firebase_drive/utils/google_drive/google_drive.dart';
 import 'package:firebase_drive/utils/message/error_message/permission_error_message.dart';
 import 'package:firebase_drive/utils/validator/drive/filename_validator.dart';
 import 'package:firebase_drive/widgets/textform_field/custom_textformfield.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
+import '../../utils/constants/drive/drive_page.dart' as drive_constants;
 
 class DrivePage extends StatefulWidget {
   const DrivePage({super.key});
@@ -17,15 +19,10 @@ class DrivePage extends StatefulWidget {
 }
 
 class _DrivePageState extends State<DrivePage> {
-  String saveText = 'アップロード';
-  String selectFileText = 'ファイルを選択する';
   final TextEditingController fileNameController = TextEditingController();
   String fileName = '';
   bool isFileFound = false;
   File sourceFile = File('');
-  String errorText = 'アクセスが許可されていません';
-  String fileErrorText = 'ファイルエラーです';
-  String fileNotFoundErrorText = 'ファイルが見つかりません';
 
   @override
   void initState() {
@@ -56,7 +53,8 @@ class _DrivePageState extends State<DrivePage> {
         List<FileSystemEntity> fileList = downloadsDir.listSync().where((file) {
           String filePath = file.path.toLowerCase();
           return FileSystemEntity.isFileSync(filePath) &&
-              (filePath.endsWith('.jpg')) || (filePath.endsWith('.png'));
+                  (filePath.endsWith('.jpg')) ||
+              (filePath.endsWith('.png'));
         }).toList();
         for (var file in fileList) {
           if (file.path == '/storage/emulated/0/Download/$fileName') {
@@ -68,13 +66,16 @@ class _DrivePageState extends State<DrivePage> {
           }
         }
         if (!isFileFound) {
-          PermissionErrorMessage(fileNotFoundErrorText).informAction(context);
+          const PermissionErrorMessage(drive_constants.fileNotFoundErrorText)
+              .informAction(context);
         }
       } catch (e) {
-        PermissionErrorMessage(errorText).informAction(context);
+        const PermissionErrorMessage(drive_constants.errorText)
+            .informAction(context);
       }
     } else {
-      PermissionErrorMessage(fileErrorText).informAction(context);
+      const PermissionErrorMessage(drive_constants.fileErrorText)
+          .informAction(context);
     }
   }
 
@@ -96,7 +97,7 @@ class _DrivePageState extends State<DrivePage> {
                 margin: const EdgeInsets.fromLTRB(35, 0, 35, 20),
                 child: CustomTextformfield(
                   controller: fileNameController,
-                  labelText: 'ファイル名',
+                  labelText: drive_constants.labelText,
                   onChanged: (value) {
                     setState(() {
                       fileName = value;
@@ -111,16 +112,19 @@ class _DrivePageState extends State<DrivePage> {
                 child: ElevatedButton.icon(
                     icon: const Icon(Icons.upload_file),
                     onPressed: () async {
+                      await LoadingDialog.show(
+                          context, drive_constants.dialogMessage);
                       String fileName = getDriveFileName();
                       await getDownloadFile();
                       await googleDrive.signIn();
                       String driveId =
                           await googleDrive.upload(sourceFile.path, fileName);
+                      await LoadingDialog.hide(context);
                       Navigator.pushNamed(context, AppRoutes.firebasePage,
                           arguments: driveId);
                     },
-                    label:
-                        Text(saveText, style: const TextStyle(fontSize: 20)))),
+                    label: const Text(drive_constants.saveText,
+                        style: const TextStyle(fontSize: 20)))),
             const Padding(padding: EdgeInsets.only(top: 50)),
           ]),
         ));
