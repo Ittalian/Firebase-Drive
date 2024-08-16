@@ -11,7 +11,8 @@ import 'package:firebase_drive/widgets/drop_down/used_app_drop_down_list.dart';
 import 'package:firebase_drive/widgets/textform_field/custom_textformfield.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../utils/constants/firebase/firebase_page.dart' as firebase_constants;
+import '../../utils/constants/firebase/firebase_page.dart'
+    as firebase_constants;
 
 class FirebasePage extends StatelessWidget {
   final String driveId;
@@ -94,7 +95,8 @@ class FirebasePage extends StatelessWidget {
                                 menuList: categoryViewModel.categories,
                                 notifyParent: setCategory))),
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                      const Text(firebase_constants.favoriteText, style: const TextStyle(fontSize: 20)),
+                      const Text(firebase_constants.favoriteText,
+                          style: TextStyle(fontSize: 20)),
                       Checkbox(
                           value: checkboxModel.isChecked,
                           onChanged: (value) =>
@@ -105,7 +107,8 @@ class FirebasePage extends StatelessWidget {
                       return ElevatedButton.icon(
                           onPressed: () {
                             if (Form.of(context).validate()) {
-                              AddFirebaseDialog.show(context, firebase_constants.saveConfirmText,
+                              AddFirebaseDialog.show(
+                                  context, firebase_constants.saveConfirmText,
                                   () {
                                 if (isFromDrive) {
                                   Picture picture = Picture(
@@ -122,7 +125,9 @@ class FirebasePage extends StatelessWidget {
                                       favorite: checkboxModel.isChecked);
                                   pictureViewModel.addPicture(picture);
                                 }
-                                const Savemessage(firebase_constants.saveMessage).informAction(context);
+                                const Savemessage(
+                                        firebase_constants.saveMessage)
+                                    .informAction(context);
                                 Navigator.pop(context);
                               });
                             }

@@ -38,11 +38,11 @@ class _UsedAppDropDownListState extends State<UsedAppDropDownList> {
           labelStyle: const TextStyle(fontSize: 20)),
       items: [
         const DropdownMenuItem<String>(
-            value: '', child: DropdownItem(name: '', fontSize: 14)),
+            value: '', child: DropdownItem(value: '', fontSize: 14)),
         for (var menu in widget.menuList)
           DropdownMenuItem<String>(
               value: menu.usedAppId,
-              child: DropdownItem(name: menu.name, fontSize: 14))
+              child: DropdownItem(value: menu.name, fontSize: 14))
       ],
       onChanged: (String? value) {
         setState(() {

@@ -15,6 +15,7 @@ class CategoryDropDownList extends StatefulWidget {
 
 class _CategoryDropDownListState extends State<CategoryDropDownList> {
   String? name;
+  String? value;
   String labelText = 'カテゴリ';
 
   @override
@@ -29,10 +30,16 @@ class _CategoryDropDownListState extends State<CategoryDropDownList> {
     });
   }
 
+  void setValue(String? newValue) {
+    setState(() {
+      value = newValue;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField<String>(
-      value: name,
+      value: value,
       decoration: InputDecoration(
           border: InputBorder.none,
           labelText: labelText,
@@ -41,7 +48,7 @@ class _CategoryDropDownListState extends State<CategoryDropDownList> {
         for (var menu in widget.menuList)
           DropdownMenuItem<String>(
               value: menu.categoryId,
-              child: DropdownItem(name: menu.name, fontSize: 14))
+              child: DropdownItem(value: menu.value, fontSize: 14))
       ],
       onChanged: (String? value) {
         setState(() {

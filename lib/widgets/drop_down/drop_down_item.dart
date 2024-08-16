@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
 class DropdownItem extends StatelessWidget {
-  final String name;
+  final String value;
   final double fontSize;
 
-  const DropdownItem({super.key, required this.name, required this.fontSize});
+  const DropdownItem({super.key, required this.value, required this.fontSize});
 
   @override
   Widget build(BuildContext context) {
     return Text(
-      name,
+      value,
       style: TextStyle(
         fontSize: fontSize,
       ),
