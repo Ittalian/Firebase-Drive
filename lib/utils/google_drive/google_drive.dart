@@ -47,6 +47,7 @@ class GoogleDrive {
     const folderName = "stable gallery";
     const subFolderName = "images";
     var txtFile = io.File(path);
+    var mimType = 'image/jpeg';
 
     String? folderId = await getOrCreateFolderId(folderName);
     String? subFolderId =
@@ -60,10 +61,14 @@ class GoogleDrive {
       }
     });
 
+    if (fileName.endsWith('.jpg')) {
+      mimType = 'image/png';
+    }
+    
     var file = File(
         name: fileName,
         modifiedTime: DateTime.now().toUtc(),
-        mimeType: 'image/jpeg',
+        mimeType: mimType,
         parents: [subFolderId!]);
     var media = Media(txtFile.openRead(), txtFile.lengthSync());
 

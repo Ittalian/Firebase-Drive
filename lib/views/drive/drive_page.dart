@@ -56,10 +56,10 @@ class _DrivePageState extends State<DrivePage> {
         List<FileSystemEntity> fileList = downloadsDir.listSync().where((file) {
           String filePath = file.path.toLowerCase();
           return FileSystemEntity.isFileSync(filePath) &&
-              (filePath.endsWith('.jpg'));
+              (filePath.endsWith('.jpg')) || (filePath.endsWith('.png'));
         }).toList();
         for (var file in fileList) {
-          if (file.path == '/storage/emulated/0/Download/$fileName.jpg') {
+          if (file.path == '/storage/emulated/0/Download/$fileName') {
             setState(() {
               sourceFile = File(file.path);
             });
