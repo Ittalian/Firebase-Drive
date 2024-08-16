@@ -106,13 +106,6 @@ class _DrivePageState extends State<DrivePage> {
                       FilenameValidator(value: value).validate(),
                 )),
             Container(
-                alignment: Alignment.center,
-                child: ElevatedButton.icon(
-                    icon: const Icon(Icons.file_copy_outlined),
-                    onPressed: () {},
-                    label: Text(selectFileText,
-                        style: const TextStyle(fontSize: 20)))),
-            Container(
                 margin: const EdgeInsets.only(top: 10),
                 alignment: Alignment.center,
                 child: ElevatedButton.icon(
