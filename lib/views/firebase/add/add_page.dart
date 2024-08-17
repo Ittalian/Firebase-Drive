@@ -2,7 +2,7 @@ import 'package:firebase_drive/models/picture_category.dart';
 import 'package:firebase_drive/models/used_app.dart';
 import 'package:firebase_drive/utils/dialog/add_firebase_dialog.dart';
 import 'package:firebase_drive/utils/message/save_message/save_message.dart';
-import 'package:firebase_drive/utils/validator/firebase/category_validator.dart';
+import 'package:firebase_drive/utils/validator/simple_validator.dart';
 import 'package:firebase_drive/view_models/category_view_model.dart';
 import 'package:firebase_drive/view_models/used_app_view_model.dart';
 import 'package:firebase_drive/widgets/textform_field/custom_textformfield.dart';
@@ -49,7 +49,7 @@ class AddPage extends StatelessWidget {
                             controller: categoryController,
                             labelText: add_constants.categoryText,
                             validator: (value) =>
-                                CategoryValidator(value: value).validate())))
+                                SimpleValidator(value: value).validate())))
                 : Flexible(
                     child: Container(
                         height: 70,
@@ -61,7 +61,7 @@ class AddPage extends StatelessWidget {
                             controller: usedAppController,
                             labelText: add_constants.usedAppText,
                             validator: (value) =>
-                                CategoryValidator(value: value).validate()))),
+                                SimpleValidator(value: value).validate()))),
             const Padding(padding: EdgeInsets.only(top: 20)),
             Builder(builder: (BuildContext context) {
               return ElevatedButton.icon(

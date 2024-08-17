@@ -1,5 +1,5 @@
 import 'package:firebase_drive/models/picture_category.dart';
-import 'package:firebase_drive/utils/validator/firebase/category_validator.dart';
+import 'package:firebase_drive/utils/validator/simple_validator.dart';
 import 'package:flutter/material.dart';
 import 'drop_down_item.dart';
 import '../../utils/constants/widget/category_drop_down_list.dart' as category_drop_down_constants;
@@ -57,7 +57,7 @@ class _CategoryDropDownListState extends State<CategoryDropDownList> {
         widget.notifyParent(value);
       },
       autovalidateMode: AutovalidateMode.onUserInteraction,
-      validator: (value) => CategoryValidator(value: value).validate(),
+      validator: (value) => SimpleValidator(value: value).validate(),
     );
   }
 }

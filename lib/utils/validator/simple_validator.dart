@@ -1,6 +1,6 @@
-class CategoryValidator {
+class SimpleValidator {
   final String? value;
-  const CategoryValidator({required this.value});
+  const SimpleValidator({required this.value});
 
   validate() {
     if (value! == '') {

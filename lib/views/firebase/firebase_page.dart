@@ -1,4 +1,5 @@
 import 'package:firebase_drive/models/picture.dart';
+import 'package:firebase_drive/routes.dart';
 import 'package:firebase_drive/utils/dialog/add_firebase_dialog.dart';
 import 'package:firebase_drive/utils/message/save_message/save_message.dart';
 import 'package:firebase_drive/utils/validator/firebase/drive_id_varlidator.dart';
@@ -130,7 +131,7 @@ class FirebasePage extends StatelessWidget {
                                 const Savemessage(
                                         firebase_constants.saveMessage)
                                     .informAction(context);
-                                Navigator.pop(context);
+                                Navigator.pushNamed(context, AppRoutes.home);
                               });
                             }
                           },
