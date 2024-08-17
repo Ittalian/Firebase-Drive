@@ -2,7 +2,8 @@ import 'package:firebase_drive/routes.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
-  const Home({super.key});
+  final String image;
+  const Home({super.key, required this.image});
 
   @override
   State<Home> createState() => _HomeState();
@@ -14,9 +15,9 @@ class _HomeState extends State<Home> {
     String driveButtonText = 'ドライブに保存';
     String firebaseButtonText = 'Firebaseに保存';
     return Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
             image: DecorationImage(
-                image: AssetImage('images/home_background.jpg'),
+                image: AssetImage(widget.image),
                 fit: BoxFit.cover)),
         child: Scaffold(
           backgroundColor: Colors.white.withOpacity(0),
@@ -27,11 +28,9 @@ class _HomeState extends State<Home> {
                   alignment: Alignment.center,
                   child: ElevatedButton.icon(
                       onPressed: () {
-                        Navigator.pushNamed(
-                          context,
-                          AppRoutes.drivePage
-                        );
-                      }, label: Text(driveButtonText))),
+                        Navigator.pushNamed(context, AppRoutes.drivePage);
+                      },
+                      label: Text(driveButtonText))),
               const Padding(padding: EdgeInsets.only(top: 10)),
               Container(
                   alignment: Alignment.center,
@@ -39,8 +38,7 @@ class _HomeState extends State<Home> {
                       onPressed: () {
                         Navigator.pushNamed(
                           context,
-                          AppRoutes.firebasePage,
-                          arguments: '',
+                          AppRoutes.addSelectPage,
                         );
                       },
                       label: Text(firebaseButtonText))),

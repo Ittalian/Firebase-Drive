@@ -1,9 +1,9 @@
 class PictureCategory {
-  final String categoryId;
+  final String? categoryId;
   final String value;
 
   PictureCategory({
-    required this.categoryId,
+    this.categoryId,
     required this.value,
   });
 
@@ -14,7 +14,6 @@ class PictureCategory {
 
   Map<String, dynamic> toMap() {
     return {
-      'category_id': categoryId,
       'value': value,
     };
   }

@@ -18,4 +18,8 @@ class CategoryViewModel extends ChangeNotifier {
       notifyListeners();
     });
   }
+
+  Future<void> addCategory(PictureCategory category) async {
+    await categoryRepository.addCategory(category);
+  }
 }

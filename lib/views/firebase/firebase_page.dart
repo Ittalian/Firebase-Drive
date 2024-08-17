@@ -15,8 +15,10 @@ import '../../utils/constants/firebase/firebase_page.dart'
     as firebase_constants;
 
 class FirebasePage extends StatelessWidget {
+  final String fromDriveImage;
+  final String fromFirebaseImage;
   final String driveId;
-  FirebasePage({super.key, required this.driveId});
+  FirebasePage({super.key, required this.fromDriveImage, required this.fromFirebaseImage, required this.driveId});
 
   final TextEditingController driveIdController = TextEditingController();
   final TextEditingController usedAppIdController = TextEditingController();
@@ -46,8 +48,8 @@ class FirebasePage extends StatelessWidget {
           decoration: BoxDecoration(
               image: DecorationImage(
                   image: driveId.isEmpty
-                      ? const AssetImage('images/firebase_background.jpg')
-                      : const AssetImage('images/firebase_background2.jpg'),
+                      ? AssetImage(fromDriveImage)
+                      : AssetImage(fromFirebaseImage),
                   fit: BoxFit.cover)),
           child: Scaffold(
               backgroundColor: Colors.white.withOpacity(0),

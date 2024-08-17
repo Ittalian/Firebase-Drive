@@ -1,9 +1,9 @@
 class UsedApp {
-  final String usedAppId;
+  final String? usedAppId;
   final String name;
 
   UsedApp({
-    required this.usedAppId,
+    this.usedAppId,
     required this.name,
   });
 
@@ -13,7 +13,6 @@ class UsedApp {
 
   Map<String, dynamic> toMap() {
     return {
-      'used_app_id': usedAppId,
       'name': name,
     };
   }

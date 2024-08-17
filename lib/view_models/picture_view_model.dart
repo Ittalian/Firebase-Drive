@@ -21,6 +21,5 @@ class PictureViewModel extends ChangeNotifier {
 
   Future<void> addPicture(Picture picture) async {
     await pictureRepository.addPicture(picture);
-    print(picture.pictureId);
   }
 }

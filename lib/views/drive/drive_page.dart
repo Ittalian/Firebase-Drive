@@ -12,7 +12,8 @@ import 'package:permission_handler/permission_handler.dart';
 import '../../utils/constants/drive/drive_page.dart' as drive_constants;
 
 class DrivePage extends StatefulWidget {
-  const DrivePage({super.key});
+  final String image;
+  const DrivePage({super.key, required this.image});
 
   @override
   State<DrivePage> createState() => _DrivePageState();
@@ -83,9 +84,9 @@ class _DrivePageState extends State<DrivePage> {
   Widget build(BuildContext context) {
     final GoogleDrive googleDrive = GoogleDrive(context: context);
     return Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
             image: DecorationImage(
-                image: AssetImage('images/drive_background.jpg'),
+                image: AssetImage(widget.image),
                 fit: BoxFit.cover)),
         child: Scaffold(
           backgroundColor: Colors.white.withOpacity(0),
