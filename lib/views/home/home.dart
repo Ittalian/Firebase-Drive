@@ -13,7 +13,9 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return PopScope(
+      canPop: false,
+      child: Container(
         decoration: BoxDecoration(
             image: DecorationImage(
                 image: AssetImage(widget.image),
@@ -44,6 +46,6 @@ class _HomeState extends State<Home> {
               const Padding(padding: EdgeInsets.only(bottom: 140)),
             ],
           ),
-        ));
+        )));
   }
 }
