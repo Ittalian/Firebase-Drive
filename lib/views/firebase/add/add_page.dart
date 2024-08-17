@@ -15,13 +15,13 @@ class AddPage extends StatelessWidget {
   final bool isCategory;
   final String categoryImage;
   final String usedAppImage;
-  AddPage({super.key, required this.isCategory, required this.categoryImage, required this.usedAppImage});
+  const AddPage({super.key, required this.isCategory, required this.categoryImage, required this.usedAppImage});
 
-  final TextEditingController categoryController = TextEditingController();
-  final TextEditingController usedAppController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController categoryController = TextEditingController();
+    TextEditingController usedAppController = TextEditingController();
     String categoryText = 'カテゴリ名';
     String usedAppText = 'アプリ名';
     final usedAppViewModel = context.watch<UsedAppViewModel>();
@@ -49,9 +49,6 @@ class AddPage extends StatelessWidget {
                         child: CustomTextformfield(
                             controller: categoryController,
                             labelText: categoryText,
-                            onChanged: (value) {
-                              categoryController.text = value;
-                            },
                             validator: (value) =>
                                 CategoryValidator(value: value).validate())))
                 : Flexible(
@@ -64,9 +61,6 @@ class AddPage extends StatelessWidget {
                         child: CustomTextformfield(
                             controller: usedAppController,
                             labelText: usedAppText,
-                            onChanged: (value) {
-                              usedAppController.text = value;
-                            },
                             validator: (value) =>
                                 CategoryValidator(value: value).validate()))),
             const Padding(padding: EdgeInsets.only(top: 20)),
