@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../constants/widget/add_firebase_dialog.dart' as add_firebase_dialog_constants;
 
 class AddFirebaseDialog extends StatefulWidget {
   final String message;
@@ -29,16 +30,14 @@ class AddFirebaseDialog extends StatefulWidget {
 }
 
 class _AddFirebaseState extends State<AddFirebaseDialog> {
-  String trueText = 'はい';
-  String falseText = 'いいえ';
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
       title: Text(widget.message),
       actions: <Widget>[
-        TextButton(onPressed: widget.trueFunction, child: Text(trueText)),
+        TextButton(onPressed: widget.trueFunction, child: const Text(add_firebase_dialog_constants.trueText)),
         TextButton(
-            onPressed: () => Navigator.pop(context), child: Text(falseText))
+            onPressed: () => Navigator.pop(context), child: const Text(add_firebase_dialog_constants.falseText))
       ],
     );
   }

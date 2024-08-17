@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../utils/constants/firebase/firebase_page.dart'
     as firebase_constants;
+import '../../../utils/constants/add_select/add/add_page.dart' as add_constants;
 
 class AddPage extends StatelessWidget {
   final bool isCategory;
@@ -22,8 +23,6 @@ class AddPage extends StatelessWidget {
   Widget build(BuildContext context) {
     TextEditingController categoryController = TextEditingController();
     TextEditingController usedAppController = TextEditingController();
-    String categoryText = 'カテゴリ名';
-    String usedAppText = 'アプリ名';
     final usedAppViewModel = context.watch<UsedAppViewModel>();
     final categoryViewModel = context.watch<CategoryViewModel>();
     return Container(
@@ -48,7 +47,7 @@ class AddPage extends StatelessWidget {
                         color: Colors.white,
                         child: CustomTextformfield(
                             controller: categoryController,
-                            labelText: categoryText,
+                            labelText: add_constants.categoryText,
                             validator: (value) =>
                                 CategoryValidator(value: value).validate())))
                 : Flexible(
@@ -60,7 +59,7 @@ class AddPage extends StatelessWidget {
                         color: Colors.white,
                         child: CustomTextformfield(
                             controller: usedAppController,
-                            labelText: usedAppText,
+                            labelText: add_constants.usedAppText,
                             validator: (value) =>
                                 CategoryValidator(value: value).validate()))),
             const Padding(padding: EdgeInsets.only(top: 20)),

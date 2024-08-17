@@ -4,7 +4,9 @@ import 'package:firebase_drive/repositories/category_repository.dart';
 import 'package:firebase_drive/repositories/picture_repository.dart';
 import 'package:firebase_drive/repositories/used_app_repository.dart';
 import 'package:firebase_drive/routes.dart';
-import 'package:firebase_drive/services/firestore_service.dart';
+import 'package:firebase_drive/services/category/category_firestore_service.dart';
+import 'package:firebase_drive/services/picture/picture_firestore_service.dart';
+import 'package:firebase_drive/services/used_app/used_app_firestore_service.dart';
 import 'package:firebase_drive/view_models/category_view_model.dart';
 import 'package:firebase_drive/view_models/picture_view_model.dart';
 import 'package:firebase_drive/view_models/used_app_view_model.dart';
@@ -30,13 +32,13 @@ class MyApp extends StatelessWidget {
         providers: [
           ChangeNotifierProvider(
               create: (_) =>
-                  PictureViewModel(PictureRepository(FirestoreService()))),
+                  PictureViewModel(PictureRepository(PictureFirestoreService()))),
           ChangeNotifierProvider(
               create: (_) =>
-                  UsedAppViewModel(UsedAppRepository(FirestoreService()))),
+                  UsedAppViewModel(UsedAppRepository(UsedAppFirestoreService()))),
           ChangeNotifierProvider(
               create: (_) =>
-                  CategoryViewModel(CategoryRepository(FirestoreService()))),
+                  CategoryViewModel(CategoryRepository(CategoryFirestoreService()))),
           ChangeNotifierProvider(create: (_) => CustomCheckbox()),
         ],
         child: const MaterialApp(

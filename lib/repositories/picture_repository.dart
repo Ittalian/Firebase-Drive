@@ -1,8 +1,8 @@
+import 'package:firebase_drive/services/picture/picture_firestore_service.dart';
 import '../models/picture.dart';
-import '../services/firestore_service.dart';
 
 class PictureRepository {
-  final FirestoreService firestoreService;
+  final PictureFirestoreService firestoreService;
 
   PictureRepository(this.firestoreService);
 

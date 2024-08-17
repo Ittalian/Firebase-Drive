@@ -1,8 +1,8 @@
-import 'package:firebase_drive/services/firestore_service.dart';
+import 'package:firebase_drive/services/category/category_firestore_service.dart';
 import '../models/picture_category.dart';
 
 class CategoryRepository {
-  final FirestoreService firestoreService;
+  final CategoryFirestoreService firestoreService;
 
   CategoryRepository(this.firestoreService);
 

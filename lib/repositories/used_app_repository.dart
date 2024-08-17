@@ -1,8 +1,8 @@
 import 'package:firebase_drive/models/used_app.dart';
-import 'package:firebase_drive/services/firestore_service.dart';
+import 'package:firebase_drive/services/used_app/used_app_firestore_service.dart';
 
 class UsedAppRepository {
-  final FirestoreService firestoreService;
+  final UsedAppFirestoreService firestoreService;
 
   UsedAppRepository(this.firestoreService);
 

@@ -1,5 +1,6 @@
 import 'package:firebase_drive/routes.dart';
 import 'package:flutter/material.dart';
+import '../../utils/constants/add_select/add_select_page.dart' as add_select_constants;
 
 class AddSelectPage extends StatelessWidget {
   final String image;
@@ -7,9 +8,6 @@ class AddSelectPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String addPictureText = '写真を追加';
-    String addCategoryText = 'カテゴリを追加';
-    String addUsedAppText = 'アプリを追加';
     return Container(
         decoration: BoxDecoration(
             image: DecorationImage(
@@ -30,7 +28,7 @@ class AddSelectPage extends StatelessWidget {
                           arguments: '',
                         );
                       },
-                      label: Text(addPictureText))),
+                      label: const Text(add_select_constants.addPictureText))),
               const Padding(padding: EdgeInsets.only(top: 10)),
               Container(
                   alignment: Alignment.center,
@@ -42,7 +40,7 @@ class AddSelectPage extends StatelessWidget {
                           arguments: true,
                         );
                       },
-                      label: Text(addCategoryText))),
+                      label: const Text(add_select_constants.addCategoryText))),
               const Padding(padding: EdgeInsets.only(top: 10)),
               Container(
                   alignment: Alignment.center,
@@ -54,7 +52,7 @@ class AddSelectPage extends StatelessWidget {
                           arguments: false,
                         );
                       },
-                      label: Text(addUsedAppText))),
+                      label: const Text(add_select_constants.addUsedAppText))),
               const Padding(padding: EdgeInsets.only(bottom: 140)),
             ],
           ),
