@@ -73,10 +73,13 @@ class _DrivePageState extends State<DrivePage> {
       } catch (e) {
         const PermissionErrorMessage(drive_constants.errorText)
             .informAction(context);
+      } finally {
+        await LoadingDialog.hide(context);
       }
     } else {
       const PermissionErrorMessage(drive_constants.fileErrorText)
           .informAction(context);
+      await LoadingDialog.hide(context);
     }
   }
 
@@ -86,8 +89,7 @@ class _DrivePageState extends State<DrivePage> {
     return Container(
         decoration: BoxDecoration(
             image: DecorationImage(
-                image: AssetImage(widget.image),
-                fit: BoxFit.cover)),
+                image: AssetImage(widget.image), fit: BoxFit.cover)),
         child: Scaffold(
           backgroundColor: Colors.white.withOpacity(0),
           body: Column(mainAxisAlignment: MainAxisAlignment.end, children: [
@@ -125,7 +127,7 @@ class _DrivePageState extends State<DrivePage> {
                           arguments: driveId);
                     },
                     label: const Text(drive_constants.saveText,
-                        style: const TextStyle(fontSize: 20)))),
+                        style: TextStyle(fontSize: 20)))),
             const Padding(padding: EdgeInsets.only(top: 50)),
           ]),
         ));
